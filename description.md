@@ -1,4 +1,4 @@
-🔐 **Captcha Validator – Short & Clear Problem Statement**
+🔐 **Captcha Validator**
 
 ---
 
