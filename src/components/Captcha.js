@@ -1,15 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Captcha.css";
 
-interface CaptchaProps {
-  initialCaptcha?: string;
-}
-
-const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
+const Captcha = ({ initialCaptcha }) => {
   const [captcha, setCaptcha] = useState("");
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef(null);
 
   const generateCaptchaText = () => {
     const chars =
@@ -20,7 +16,7 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
     ).join("");
   };
 
-  const drawCaptcha = (text: string) => {
+  const drawCaptcha = (text) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -31,18 +27,16 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
     ctx.font = "italic bold 36px Arial";
     ctx.fillStyle = "#000";
 
-    // Slight rotation
     ctx.save();
     ctx.translate(10, 40);
     ctx.rotate(Math.random() * 0.1 - 0.05);
     ctx.fillText(text, 0, 0);
     ctx.restore();
 
-    // Add some distortion lines
     for (let i = 0; i < 3; i++) {
       ctx.beginPath();
-      ctx.moveTo(Math.random() * 150, Math.random() * 50);
-      ctx.lineTo(Math.random() * 150, Math.random() * 50);
+      ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+      ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
       ctx.strokeStyle = "rgba(0,0,0,0.2)";
       ctx.stroke();
     }
@@ -53,10 +47,9 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
     setCaptcha(newCaptcha);
     drawCaptcha(newCaptcha);
     setInput("");
-    // Do not clear the message here
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim().toLowerCase() === captcha.toLowerCase()) {
       setMessage("✅ Captcha Verified!");
@@ -64,7 +57,7 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
       setMessage("❌ Incorrect Captcha. Try again.");
       setTimeout(() => {
         refreshCaptcha();
-      }, 500); // Show error for 500ms before refreshing
+      }, 500);
     }
   };
 
@@ -88,6 +81,7 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
             className="captcha-canvas"
             data-testid="captcha-canvas"
           />
+
           <button
             type="button"
             onClick={refreshCaptcha}
@@ -96,6 +90,7 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
             🔁
           </button>
         </div>
+
         <input
           type="text"
           value={input}
@@ -103,9 +98,11 @@ const Captcha: React.FC<CaptchaProps> = ({ initialCaptcha }) => {
           placeholder="Enter Captcha"
           className="captcha-input"
         />
+
         <button type="submit" className="submit-btn">
           Submit
         </button>
+
         {message && <p className="captcha-msg">{message}</p>}
       </form>
     </div>
