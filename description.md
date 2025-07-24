@@ -1,4 +1,4 @@
-🔐 **Captcha Validator**
+## 🔐 **Captcha Validator**
 
 ---
 
@@ -13,59 +13,59 @@ Build a React component that displays a 5-letter **random uppercase captcha**, l
 1. **Captcha Generation**
 
    * On load, generate a random 5-letter **uppercase** captcha (like `ABZPQ`)
-   * Display it inside a styled `div` or `canvas`
-   * Use `data-testid="captcha-canvas"`
+   * Display it using a styled `div` or `canvas`
+   * Use `data-testid="captcha-canvas"` for testing
 
 2. **User Input**
 
-   * Input box with placeholder: `"Enter Captcha"`
+   * Provide an input field with placeholder: `"Enter Captcha"`
 
 3. **Buttons**
 
    * **🔁 Refresh Button**
-     ➤ Generates new captcha & clears input
-   * **Submit Button**
-     ➤ Validates input (case-sensitive)
 
-4. **Result Message**
+     * Regenerates a new captcha and clears the input
+   * **Submit Button**
+
+     * Validates the entered input against the displayed captcha (case-sensitive)
+
+4. **Result Feedback**
 
    * If correct: ✅ `Captcha Verified`
-   * If wrong: ❌ `Incorrect Captcha`
-   * Use clear feedback via dynamic text
+   * If incorrect or empty: ❌ `Incorrect Captcha`
+
+---
+
+### 🔎 Constraints (Used in Test Cases)
+
+| Element        | Constraint                     |
+| -------------- | ------------------------------ |
+| Captcha Box    | `data-testid="captcha-canvas"` |
+| Input Field    | Has class `captcha-input`      |
+| Submit Button  | Has class `submit-btn`         |
+| Refresh Button | Has class `refresh-btn`        |
 
 ---
 
 ### 🧪 Test Coverage
 
-| **Test Case** | **What to Validate**                       |
-| ------------- | ------------------------------------------ |
-| TC1           | Renders captcha box and form properly      |
-| TC2           | Refresh regenerates captcha + clears input |
-| TC3           | Correct input → “Captcha Verified”         |
-| TC4           | Wrong input → “Incorrect Captcha”          |
-| TC5           | Empty input → “Incorrect Captcha”          |
-| TC6           | Buttons & input have proper CSS classes    |
-| TC7           | Layout is responsive on different screens  |
+| **Test Case** | **What to Validate**                         |
+| ------------- | -------------------------------------------- |
+| TC1           | Captcha box and form render correctly        |
+| TC2           | Refresh regenerates captcha and clears input |
+| TC3           | Correct input shows “Captcha Verified”       |
+| TC4           | Wrong input shows “Incorrect Captcha”        |
+| TC5           | Empty input shows “Incorrect Captcha”        |
+| TC6           | Buttons and input have correct CSS classes   |
+| TC7           | Layout is responsive on different screens    |
 
 ---
 
-### ⚠️ Edge Cases
+### 💡 Hints
 
-* Input **must be case-sensitive**
-* Captcha **must regenerate on refresh**
-* Empty submission must show “Incorrect Captcha”
+* Think about how to generate a random string of 5 uppercase letters using JavaScript.
+* Consider using the `<canvas>` API or a styled `<div>` to visually show the captcha.
+* Ensure that captcha comparison is case-sensitive when validating.
+* Don’t forget to clear the input field when the captcha is refreshed.
 
----
-
-### 📋 Sample Test Code
-
-```tsx
-fireEvent.change(screen.getByPlaceholderText("Enter Captcha"), {
-  target: { value: "ABZPQ" }
-});
-fireEvent.click(screen.getByRole("button", { name: /Submit/i }));
-expect(screen.getByText("Captcha Verified")).toBeInTheDocument();
-```
-
----
 
