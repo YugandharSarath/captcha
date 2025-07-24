@@ -17,7 +17,7 @@ global.HTMLCanvasElement.prototype.getContext = () => {
     font: '',              
     fillStyle: '',         
     strokeStyle: '',       
-  };
+  } as any;
 };
 
 describe("Captcha Component", () => {
