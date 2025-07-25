@@ -1,71 +1,53 @@
+
+---
+
 ## 🔐 **Captcha Validator**
 
 ---
 
-### 🧠 Goal
+### 🎯 **Objective**
 
-Build a React component that displays a 5-letter **random uppercase captcha**, lets users type it, and validates it on submission.
+Build a React component that simulates a basic captcha system. It should generate a **5-letter uppercase code**, allow user input, and validate the input with proper feedback and interaction.
 
 ---
 
-### ✅ Features to Implement
+### ✅ **Requirements**
 
 1. **Captcha Generation**
 
-   * On load, generate a random 5-letter **uppercase** captcha (like `ABZPQ`)
-   * Display it using a styled `div` or `canvas`
-   * Use `data-testid="captcha-canvas"` for testing
+   * When the component loads, generate a **random 5-character captcha** using only **uppercase letters (A–Z)**.
+   * Display this captcha visually using a canvas or styled block element.
 
-2. **User Input**
+2. **User Interaction**
 
-   * Provide an input field with placeholder: `"Enter Captcha"`
+   * Provide a text input where users can enter the captcha code.
+   * Include a **Submit** button to validate the entered input.
+   * Include a **Refresh** button that regenerates a new captcha and clears the input.
 
-3. **Buttons**
+3. **Feedback Mechanism**
 
-   * **🔁 Refresh Button**
+   * If the user enters the **exact same characters** (case-sensitive) as the displayed captcha → show success message: **"Captcha Verified"**.
+   * If incorrect or empty → show error message: **"Incorrect Captcha"**.
+   * Do not auto-refresh the captcha immediately on error; give the user feedback briefly.
 
-     * Regenerates a new captcha and clears the input
-   * **Submit Button**
+4. **Styling and Layout**
 
-     * Validates the entered input against the displayed captcha (case-sensitive)
-
-4. **Result Feedback**
-
-   * If correct: ✅ `Captcha Verified`
-   * If incorrect or empty: ❌ `Incorrect Captcha`
+   * All input fields and buttons must be styled clearly and consistently.
+   * The layout should be responsive and remain clean across screen sizes.
 
 ---
 
-### 🔎 Constraints (Used in Test Cases)
+### ⚠️ **Edge Cases & Constraints**
 
-| Element        | Constraint                     |
-| -------------- | ------------------------------ |
-| Captcha Box    | `data-testid="captcha-canvas"` |
-| Input Field    | Has class `captcha-input`      |
-| Submit Button  | Has class `submit-btn`         |
-| Refresh Button | Has class `refresh-btn`        |
+* The **captcha comparison must be case-sensitive** — lowercase characters should be treated as incorrect even if the letters are right.
+* If the **input field is left blank**, and the user submits, show an **error message**.
+* After clicking the **refresh button**, the captcha should:
 
----
-
-### 🧪 Test Coverage
-
-| **Test Case** | **What to Validate**                         |
-| ------------- | -------------------------------------------- |
-| TC1           | Captcha box and form render correctly        |
-| TC2           | Refresh regenerates captcha and clears input |
-| TC3           | Correct input shows “Captcha Verified”       |
-| TC4           | Wrong input shows “Incorrect Captcha”        |
-| TC5           | Empty input shows “Incorrect Captcha”        |
-| TC6           | Buttons and input have correct CSS classes   |
-| TC7           | Layout is responsive on different screens    |
+  * Regenerate a new random string.
+  * Clear the input field.
+  * Leave previous messages (optional: show briefly or reset).
+* The layout must render correctly on different device sizes — ensure form, input, and captcha box do not overlap or misalign.
+* Elements like input, submit, and refresh must be distinguishable and styled appropriately for usability.
 
 ---
-
-### 💡 Hints
-
-* Think about how to generate a random string of 5 uppercase letters using JavaScript.
-* Consider using the `<canvas>` API or a styled `<div>` to visually show the captcha.
-* Ensure that captcha comparison is case-sensitive when validating.
-* Don’t forget to clear the input field when the captcha is refreshed.
-
 

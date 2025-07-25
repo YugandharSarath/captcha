@@ -1,5 +1,5 @@
 import React from "react";
-import CaptchaForm from "./components/Captcha";
+import CaptchaForm from "./Captcha";
 
 function App() {
   return (
